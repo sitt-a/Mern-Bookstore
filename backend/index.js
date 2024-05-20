@@ -11,6 +11,9 @@ app.get("/", (request, response) => {
   return response.status(234).send("welcome");
 });
 
+
+
+
 app.post("/books", async (request, response) => {
   try {
     if (!request.body.title || !request.body.author || !request.body.publicationYear) {
@@ -56,6 +59,15 @@ app.get('/books/:id', async (request,response)=>{
     }
 })
 
+app.put("/books:id", async (request,response)=>{
+  try{
+      const books = await Book.find({});
+      return response.status(200).json( books);
+  }catch(error){
+      console.log(error.message);
+      response.status(500).send({ message: error.message });
+  }
+})
 
 mongoose.connect(mongoUrl)
   .then(() => {
