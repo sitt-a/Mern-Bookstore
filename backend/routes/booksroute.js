@@ -1,15 +1,11 @@
-import e from "express";
+import express from "express";
+import { Book } from "../models/bookModel.js";
+
 const router = express.Router();
 
-router.get("/", (request, response) => {
-  console.log(request);
-  return response.status(234).send("welcome");
-});
 
 
-
-
-router.post("/books", async (request, response) => {
+router.post("/", async (request, response) => {
   try {
     if (!request.body.title || !request.body.author || !request.body.publicationYear) {
       return response.status(400).send({
@@ -32,7 +28,7 @@ router.post("/books", async (request, response) => {
   }
 });
 
-router.get('/books', async (request,response)=>{
+router.get('/', async (request,response)=>{
     try{
         const books = await Book.find({});
         return response.status(200).json( books);
@@ -42,7 +38,7 @@ router.get('/books', async (request,response)=>{
     }
 })
 
-router.get('/books/:id', async (request,response)=>{
+router.get('/:id', async (request,response)=>{
     try{
         const {id} =request.params;
         const book = await Book.findById(id);
@@ -54,7 +50,7 @@ router.get('/books/:id', async (request,response)=>{
     }
 })
 
-router.put("/books/:id", async (request,response)=>{
+router.put("/:id", async (request,response)=>{
   try{
     if (!request.body.title || !request.body.author || !request.body.publicationYear) {
       return response.status(400).send({message:"send all required fields error"})
@@ -71,7 +67,7 @@ router.put("/books/:id", async (request,response)=>{
   }
 })
 
-router.delete("/books/:id", async (request,response)=>{
+router.delete("/:id", async (request,response)=>{
   try{
       const {id} =request.params;
       const result = await Book.findByIdAndDelete(id);
@@ -85,3 +81,4 @@ router.delete("/books/:id", async (request,response)=>{
       response.status(500).send({ message: error.message });
   }
 })
+export default router;
