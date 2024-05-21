@@ -6,4 +6,4 @@ const CreateBook = () => {
   )
 }
 
-export default CreateBook
+export default CreateBook;
