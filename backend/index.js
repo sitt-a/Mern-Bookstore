@@ -2,18 +2,20 @@ import express from "express";
 import { Book } from "./models/bookModel.js";
 import { PORT, mongoUrl } from "./config.js";
 import mongoose from "mongoose";
-import { booksroute } from "./route/booksroute.js";
+// index.js
+import { router } from "./routes/booksroute.js";
+
 
 const app = express();
 app.use(express.json());
 
-router.get("/", (request, response) => {
+app.get("/", (request, response) => {
   console.log(request);
   return response.status(234).send("welcome");
 });
 
 
-app.use("/books",booksroute);
+app.use("/books",router);
 
 mongoose.connect(mongoUrl)
   .then(() => {
