@@ -16,6 +16,12 @@ const BooksCard = ({books}) => {
    <h3 className='my-2 text-gray-500'>{item._id}</h3>
    <div className='flex justify-start items-center gap-x-2'>
     <PiBookOpenTextLight className='text-xl'></PiBookOpenTextLight>
+   <h1 className='my-1'>{item.title}</h1> 
+   </div>
+   <div className='flex justify-start items-center gap-x-2'>
+      
+    <BiUserCircle className='text-red-300 text-2xl'></BiUserCircle>
+   <h1 className='my-1'>{item.author}</h1>
    </div>
 </div>
   ))}
